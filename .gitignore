@@ -4,3 +4,4 @@ nginx/
 env/
 custom.ini
 php.dockerfile
+backend/db/config.php

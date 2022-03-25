@@ -10,14 +10,20 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="styles/main.css">
+    <script type="text/javascript" src="js/login.js"></script>
 </head>
 <body class="bg-light">
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
+            <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 mt-5" id="container-error-message">
+                <div class="alert alert_error"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                    <strong id="error-message"></strong>
+                </div>
+            </div>
             <div class="card my-5 border border-5 border-secondary">
 
-                <form class="card-body cardbody-color p-lg-5">
+                <form class="card-body cardbody-color p-lg-5" id="login-form" action="POST">
 
                     <div class="text-center">
                         <img src="https://cdn.pixabay.com/photo/2016/08/31/11/54/user-1633249_960_720.png"
@@ -30,12 +36,12 @@
                     </div>
                     <div class="mb-3 mt-4 input-group">
                         <span class="input-group-text"><i class="bi bi-person-circle"></i></span>
-                        <input type="text" class="form-control p-3" id="Username" aria-describedby="emailHelp"
+                        <input type="text" class="form-control p-3" name="user" id="Username" aria-describedby="emailHelp"
                                placeholder="Usuario">
                     </div>
                     <div class="mb-3 mt-4 input-group">
                         <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-                        <input type="password" class="form-control p-3" id="password" placeholder="Contraseña">
+                        <input type="password" class="form-control p-3" name="pass" id="password" placeholder="Contraseña">
                     </div>
 
                     <div class="text-center mt-5">

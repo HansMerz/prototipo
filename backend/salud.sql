@@ -54,7 +54,8 @@ DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE `usuario` (
   `idusuario` int(11) NOT NULL AUTO_INCREMENT,
   `correo` varchar(65) NOT NULL,
-  `contraseña` varchar(45) NOT NULL,
+  `username` VARCHAR(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
   `nombre` varchar(45) DEFAULT NULL,
   `apellido` varchar(45) DEFAULT NULL,
   `genero` varchar(45) DEFAULT NULL,
