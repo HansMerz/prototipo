@@ -6,9 +6,10 @@ body{
  
   font-family: 'Signika', sans-serif;
   font-size:21px;
+
 }
 header {
-  background: #fff;
+  background: #989393;
   padding: 10px 20px;
   box-shadow: 0px -8px 25px #6d6d6d;       position: fixed;
   top: 0;
@@ -27,7 +28,7 @@ header {
 }
 aside {
   width: 60px;
-  background: #fff;
+  background: #989393;
   padding: 0px 0px 10px 0px;
   position: absolute;
   left: 0;
@@ -49,11 +50,12 @@ aside ul li {
 }
 aside ul li a {
   font-size: 14px;
-  color: #4a4a4a;
-  text-decoration: none;
+  color: #fff;
+  text-decoration: none !important;
   text-transform:uppercase;   
   white-space: nowrap;
   display: inline-block;
+
 }
 aside ul li a span {
   display: inline-block;
@@ -70,11 +72,11 @@ article {
   border-radius: 5px;
   box-shadow: 0px 2px 7px #6d6d6d;
 }
-aside ul li:hover {
-  background: #fff;
-  box-shadow: inset 0px 0px 77px #dedede;
-}
 
+
+.material-icons{
+  color: #fff;
+}
 
 
 aside.keep.width {
