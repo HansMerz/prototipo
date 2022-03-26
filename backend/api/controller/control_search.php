@@ -1,7 +1,14 @@
 <?php
 
-require_once '../../db/Database.php';
+require_once(realpath(dirname(__FILE__) . '/../../db/Database.php'));
 
-$database = new Database();
+function getControlData() {
 
-$controlData = $database->select('SELECT * FROM control;');
+    $database = new Database();
+    $params = [
+      'i',
+      $_SESSION['client']['idusuario']
+    ];
+    $controlData = $database->select('SELECT * FROM control WHERE usuario_idusuario = ?;', $params);
+    return $controlData;
+}

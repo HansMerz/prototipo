@@ -8,6 +8,10 @@ if (!isset($_SESSION['client'])) {
     header("Location: ../index.php");
 }
 
+require_once '../backend/api/controller/control_search.php';
+
+$controlData = getControlData();
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -135,7 +139,11 @@ if (!isset($_SESSION['client'])) {
         </ul>
     </aside>
     <article>
-
+        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 mt-5" id="container-error-message">
+            <div class="alert alert_error"> <button aria-hidden="true" data-dismiss="alert" class="close" type="button">×</button>
+                <strong id="error-message"></strong>
+            </div>
+        </div>
         <div class="jumbotron">
             <h1>Control de salud</h1>
 
@@ -184,13 +192,21 @@ if (!isset($_SESSION['client'])) {
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row mt-5">
+                        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6" id="success-container-message">
+                            <div class="alert alert-success d-flex align-items-center" role="alert">
+                                <span class="material-icons text-dark">
+                                    check_circle
+                                </span>
+                                <strong id="success-message"></strong>
+                            </div>
+                        </div>
                         <div class="col-sm-12">
                             <table class="table">
                                 <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Doctor</th>
+                                    <th scope="col">Doctor(a)</th>
                                     <th scope="col">Especialización</th>
                                     <th scope="col">Fecha</th>
                                     <th scope="col">Observaciones</th>
@@ -198,14 +214,26 @@ if (!isset($_SESSION['client'])) {
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th scope="row">1</th>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                        <td>@mdo</td>
-                                    </tr>
+                                    <?php foreach ($controlData as $item) : ?>
+                                        <tr>
+                                            <th scope="row">
+                                                <input type="hidden" id="control-<?php echo $item['idcontrol'];?>" value="<?php echo $item['idcontrol'];?>" >
+                                                <?php echo $item['idcontrol'];?>
+                                            </th>
+                                            <td><?php echo $item['profesional'];?></td>
+                                            <td><?php echo $item['especializacion'];?></td>
+                                            <td><?php echo $item['fecha'];?></td>
+                                            <td><?php echo $item['observacion'];?></td>
+                                            <td>
+                                                <button type="button" data-id="<?php echo $item['idcontrol'];?>" class="btn btn-success">
+                                                    <span class="material-icons">edit</span>
+                                                </button>
+                                                <button type="button" data-id="<?php echo $item['idcontrol'];?>" class="btn btn-danger delete-control">
+                                                    <span class="material-icons">delete</span>
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
                                 </tbody>
                             </table>
                         </div>

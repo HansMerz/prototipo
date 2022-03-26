@@ -49,6 +49,19 @@ class Database {
         return false;
     }
 
+    public function deleteControl($controlId)
+    {
+        try {
+            $stmt = $this->executeStatement( "DELETE FROM control WHERE idcontrol = ?" , ['i', $controlId] );
+            if ($stmt) {
+                return true;
+            }
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+        return false;
+    }
+
     private function executeStatementAuth($query, $user, $pass)
     {
         try {
@@ -58,6 +71,26 @@ class Database {
                 throw New Exception("Unable to do prepared statement: " . $query);
             }
             $stmt->bind_param("ss", $user, $pass);
+
+            $stmt->execute();
+
+            return $stmt;
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+    }
+
+    private function executeStatement($query, $params = [])
+    {
+        try {
+            $stmt = $this->connection->prepare( $query );
+
+            if($stmt === false) {
+                throw New Exception("Unable to do prepared statement: " . $query);
+            }
+            if ($params) {
+                $stmt->bind_param($params[0], $params[1]);
+            }
 
             $stmt->execute();
 

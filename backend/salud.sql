@@ -27,7 +27,7 @@ CREATE TABLE `control` (
   `fecha` date NOT NULL,
   `profesional` varchar(65) DEFAULT NULL,
   `especializacion` varchar(45) DEFAULT NULL,
-  `observacion` varchar(45) DEFAULT NULL,
+  `observacion` text DEFAULT NULL,
   `usuario_idusuario` int(11) NOT NULL,
   PRIMARY KEY (`idcontrol`),
   KEY `fk_control_usuario_idx` (`usuario_idusuario`),
