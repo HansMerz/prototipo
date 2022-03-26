@@ -37,7 +37,7 @@ function showErrorMessage (message) {
 }
 
 function authUser (auth) {
-    const api = window.location.origin + '/backend/api/controller/auth.php'
+    const api =  'backend/api/controller/auth.php'
     fetch(api, {
         method: "POST",
         body: JSON.stringify(auth),
@@ -47,15 +47,24 @@ function authUser (auth) {
     })
         .then((res) => res.json())
         .then((data) => {
+
             if (data.error) {
                 showErrorMessage(data.message);
             }
 
             if(data.auth) {
-              window.location.href = '../client/client.php';
+               var path =window.location.pathname.substr(window.location.pathname.indexOf("/")+1,window.location.pathname.lastIndexOf("/"));
+               
+               if(path=="prototipo/"){
+                
+                window.location.href = 'prototipo/../client/client.php';
+               }
+              
             }
         })
         .catch((data) => {
+          
             showErrorMessage(data.message);
+
         });
 }
