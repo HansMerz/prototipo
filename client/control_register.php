@@ -159,29 +159,29 @@ $controlData = getControlData();
 
 
                         <div class="container-fluid">
-                            <form>
+                            <form id="control-form" action="POST">
                                 <div class="form-row">
                                     <div class="form-group col-md-4">
 
-                                        <input type="text" class="form-control" id=""
+                                        <input type="text" class="form-control"  name="profesional" id="profesional"
                                                placeholder="nombre profesional de la salud" required>
                                     </div>
                                     <div class="form-group col-md-4">
 
-                                        <input type="text" class="form-control" id="" placeholder="Especialización"
+                                        <input type="text" class="form-control" name="especializacion" id="especializacion" placeholder="Especialización"
                                                required>
                                     </div>
 
                                     <div class="form-group col-md-4">
 
-                                        <input type="date" class="form-control" id="" placeholder="Fecha del control"
+                                        <input type="date" class="form-control" name="fecha" id="fecha" placeholder="Fecha del control"
                                                required>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
 
-                                    <textarea class="form-control" id="" placeholder="Observaciones"
+                                    <textarea class="form-control" name="observacion" id="observacion" placeholder="Observaciones"
                                               required></textarea>
                                 </div>
 

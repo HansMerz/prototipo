@@ -62,6 +62,21 @@ class Database {
         return false;
     }
 
+    public function registerControl($query = "", $fecha,$profesional,$especializacion,$observacion,$params = [])
+    {
+       try {
+            $stmt = $this->executeStatementRegister(  $query,$fecha,$profesional,$especializacion,$observacion,$params = [] );
+             if ($stmt) {
+                return true;
+            }
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+           
+
+        return false;
+    }
+
     private function executeStatementAuth($query, $user, $pass)
     {
         try {
@@ -71,6 +86,24 @@ class Database {
                 throw New Exception("Unable to do prepared statement: " . $query);
             }
             $stmt->bind_param("ss", $user, $pass);
+
+            $stmt->execute();
+
+            return $stmt;
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+    }
+
+    private function executeStatementRegister($query, $fecha,$profesional,$especializacion,$observacion,$params = [])
+    {
+        try {
+            $stmt = $this->connection->prepare( $query );
+
+            if($stmt === false) {
+                throw New Exception("Unable to do prepared statement: " . $query);
+            }
+            $stmt->bind_param("dsssi", $fecha,$profesional,$especializacion,$observacion,$params[0]);
 
             $stmt->execute();
 
