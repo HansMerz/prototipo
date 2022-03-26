@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once '../../db/Database.php';
 
 header('Access-Control-Allow-Origin: *');
@@ -18,22 +20,38 @@ $response = [
 ];
 
 if (isset($data)) {
-    $user = $data->user;
-    $pass = $data->pass;
+    $user = validate($data->user);
+    $pass = validate($data->pass);
 }
 if ($user && $pass) {
     $database = new Database();
     try {
         if ($auth = $database->auth($user, $pass)) {
-            $response = [
-                'auth' => true,
-                'error' => false,
-                'message' => "Autenticado"
-            ];
-            //TODO: Redirect to Dashboard
+            foreach ($auth as $client) {
+                if ($client['username'] == $user && $client['password'] == $pass) {
+                    $response = [
+                        'auth' => true,
+                        'error' => false,
+                        'message' => "Autenticado"
+                    ];
+                    $_SESSION['client'] = $client;
+                }
+            }
         }
     } catch (Exception $e) {
         $response['message'] = $e->getMessage();
     }
 }
 echo json_encode($response);
+
+function validate($data){
+
+    $data = trim($data);
+
+    $data = stripslashes($data);
+
+    $data = htmlspecialchars($data);
+
+    return $data;
+
+}

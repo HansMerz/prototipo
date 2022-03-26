@@ -52,7 +52,7 @@ function authUser (auth) {
             }
 
             if(data.auth) {
-              //TODO: Redirect to Dashboard from backend
+              window.location.href = '../client/client.php';
             }
         })
         .catch((data) => {
