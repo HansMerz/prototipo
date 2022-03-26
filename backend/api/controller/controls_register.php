@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 require_once(realpath(dirname(__FILE__) . '/../../db/Database.php'));
 
 
@@ -25,9 +25,8 @@ if (isset($data)) {
 	if( $fecha&& $profesional && $especializacion && $observacion){
 
     $database = new Database();
-    $_SESSION=session_start();
 
-    $params = ['i',$_SESSION['client']['idusuario']];
+    $params = [$_SESSION['client']['idusuario']];
     try {
         if ($register = $database->registerControl('INSERT INTO  control (fecha,profesional,especializacion,observacion,usuario_idusuario) VALUES (?,?,?,?,?);', $fecha,$profesional,$especializacion,$observacion,
         	$params)){

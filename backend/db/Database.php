@@ -62,10 +62,10 @@ class Database {
         return false;
     }
 
-    public function registerControl($query = "", $fecha,$profesional,$especializacion,$observacion,$params = [])
+    public function registerControl($query, $fecha,$profesional,$especializacion,$observacion,$params = [])
     {
        try {
-            $stmt = $this->executeStatementRegister(  $query,$fecha,$profesional,$especializacion,$observacion,$params = [] );
+            $stmt = $this->executeStatementRegister(  $query,$fecha,$profesional,$especializacion,$observacion,$params);
              if ($stmt) {
                 return true;
             }
@@ -103,7 +103,7 @@ class Database {
             if($stmt === false) {
                 throw New Exception("Unable to do prepared statement: " . $query);
             }
-            $stmt->bind_param("dsssi", $fecha,$profesional,$especializacion,$observacion,$params[0]);
+            $stmt->bind_param("ssssi", $fecha,$profesional,$especializacion,$observacion,$params[0]);
 
             $stmt->execute();
 
