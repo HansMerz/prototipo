@@ -164,7 +164,7 @@ $controlData = getControlData();
                                     <div class="form-group col-md-4">
 
                                         <input type="text" class="form-control"  name="profesional" id="profesional"
-                                               placeholder="nombre profesional de la salud" required>
+                                               placeholder="Nombre profesional de la salud" required>
                                     </div>
                                     <div class="form-group col-md-4">
 
@@ -186,7 +186,9 @@ $controlData = getControlData();
                                 </div>
 
 
-                                <button type="submit" class="btn btn-primary">Registrar</button>
+                                <button type="submit" class="btn btn-primary" id="btn-register">Registrar</button>
+                                <button type="submit" class="btn btn-primary" id="btn-update">Actualizar</button>
+                                <input type="hidden" name="idcontrol" id="control-update-value" value="0" >
                             </form>
 
                         </div>
@@ -225,7 +227,7 @@ $controlData = getControlData();
                                             <td><?php echo $item['fecha'];?></td>
                                             <td><?php echo $item['observacion'];?></td>
                                             <td>
-                                                <button type="button" data-id="<?php echo $item['idcontrol'];?>" class="btn btn-success">
+                                                <button type="button" data-id="<?php echo $item['idcontrol'];?>" class="btn btn-success update-control">
                                                     <span class="material-icons">edit</span>
                                                 </button>
                                                 <button type="button" data-id="<?php echo $item['idcontrol'];?>" class="btn btn-danger delete-control">

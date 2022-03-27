@@ -8,14 +8,35 @@ $(document).ready(function () {
         const controlId = $(this).data('id');
         const id = $("#control-" + controlId).val();
         const formData = {
-            'controlId' : controlId
+            'controlId' : id
         }
         deleteControl(formData);
+    })
+
+    $(".update-control").on('click', function (e) {
+        e.preventDefault();
+        const controlId = $(this).data('id');
+        const id = $("#control-" + controlId).val();
+        const formData = {
+            'controlId' : id
+        }
+        getControlById(formData);
+    })
+
+    $("#btn-update").on('click', function (e) {
+        e.preventDefault();
+        const form = document.getElementById('control-form');
+        const formData = new FormData(form);
+        const elements = Object.fromEntries(formData);
+        const isValid = validatesForm(elements);
+        if (isValid) {
+            updateControls(elements);
+        }
     })
 });
 
 function deleteControl(params) {
-    const api = window.location.origin + '/backend/api/controller/control_delete.php'
+    const api = '../backend/api/controller/control_delete.php'
     fetch(api, {
         method: "POST",
         body: JSON.stringify(params),
@@ -39,6 +60,37 @@ function deleteControl(params) {
         .catch((data) => {
             showErrorMessage(data.message);
         });
+}
+
+function getControlById(params) {
+    const api = '../backend/api/controller/control_search_by_id.php'
+    fetch(api, {
+        method: "POST",
+        body: JSON.stringify(params),
+        header: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            if (data.error) {
+                showErrorMessage(data.message);
+            } else {
+                showDataInFields(data.data);
+            }
+        })
+        .catch((data) => {
+            showErrorMessage(data.message);
+        });
+}
+
+function showDataInFields(data) {
+    $("#profesional").val(data.profesional);
+    $("#especializacion").val(data.especializacion);
+    $("#fecha").val(data.fecha);
+    $("#observacion").val(data.observacion);
+    $("#control-update-value").val(data.idcontrol);
+    switchButtons(false);
 }
 
 window.onload = function () {
@@ -98,7 +150,35 @@ function registerControls(control) {
             }
         })
         .catch((data) => {
-            console.log("hasta aqui esta llegando");
+            showErrorMessage(data.message);
+        });
+}
+
+function updateControls(control) {
+    const api =  '../backend/api/controller/controls_update.php'
+    fetch(api, {
+        method: "POST",
+        body: JSON.stringify(control),
+        header: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    })
+        .then((res) => res.json())
+        .then((data) => {
+
+            if (data.error) {
+                showErrorMessage(data.message);
+            }
+
+            if (data.updated) {
+                $("#control-update-value").val("");
+                showSuccessMessage(data.message);
+                setTimeout(function () {
+                    location.reload();
+                }, 3000)
+            }
+        })
+        .catch((data) => {
             showErrorMessage(data.message);
         });
 }
@@ -121,4 +201,14 @@ function showSuccessMessage(message) {
     setTimeout(function () {
         messageContainer.style.display = 'none';
     }, 3000)
+}
+
+function switchButtons(showRegister) {
+    if (showRegister) {
+        $("#btn-register").show();
+        $("#btn-update").hide();
+    } else {
+        $("#btn-register").hide();
+        $("#btn-update").show();
+    }
 }

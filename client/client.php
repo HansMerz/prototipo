@@ -84,32 +84,10 @@ if (!isset($_SESSION['client'])) {
 
 
             <li class="active">
-                <a href="#controles" data-toggle="collapse" class="dropdown-toggle">
+                <a href="control_register.php">
                     <span class="material-icons">medical_services</span>
                     Controles médicos
                 </a>
-
-                <ul class="collapse list-unstyled" id="controles">
-
-
-                    <li>
-                        <a href="control_register.php">
-                            <span class="material-icons">edit_calendar</span>
-                            Registar controles
-                        </a>
-                    </li>
-
-
-                    <li>
-                        <a href="control_search">
-                            <span class="material-icons">manage_search</span>
-                            consultar controles
-                        </a>
-                    </li>
-
-
-                </ul>
-
             </li>
 
 

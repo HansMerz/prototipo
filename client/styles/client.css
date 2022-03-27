@@ -169,4 +169,7 @@ button.close {
   display: none;
   width: 100%;
 }
+#btn-update {
+  display: none;
+}
 /*  */

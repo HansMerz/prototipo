@@ -49,6 +49,22 @@ class Database {
         return false;
     }
 
+    public function getControlById($controlId)
+    {
+        try {
+            $stmt = $this->executeStatement(
+                'SELECT * FROM control WHERE idcontrol = ?', $controlId
+            );
+            $result = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+            $stmt->close();
+
+            return $result;
+        } catch(Exception $e) {
+            throw New Exception( $e->getMessage() );
+        }
+        return false;
+    }
+
     public function deleteControl($controlId)
     {
         try {
