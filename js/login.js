@@ -58,6 +58,8 @@ function authUser (auth) {
                if(path=="prototipo/"){
                 
                 window.location.href = 'prototipo/../client/client.php';
+               } else {
+                   window.location.href = '../client/client.php';
                }
               
             }
